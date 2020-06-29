@@ -154,5 +154,19 @@ public class OllivandersTest {
 			assertEquals("Doobey", elfo.getNombre());
 			assertEquals(15, elfo.getDestreza());
 		}
+		
+		/**
+		 * Implementa el metodo cargaItem del repositorio
+		 * que devuelve el item con el nombre indicado
+		 */
+		@Test
+		public void test_carga_item() {
+			assertNotNull(repo);
+			NormalItem item = (NormalItem) repo.cargaItem("Elixir of the Mongoose");
+			assertNotNull(item);
+			assertEquals("Elixir of the Mongoose", item.getNombre());
+			assertEquals(7, item.getQuality(), 0);
+		}
+
 
 }
