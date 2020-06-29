@@ -8,17 +8,13 @@
  */
 
 
-package org.elsmancs;
+package org.elsmancs.practica;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,12 +24,13 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.elsmancs.practica.controlador.Controlador;
-import org.elsmancs.practica.dominio.NormalItem;
 import org.elsmancs.practica.dominio.Orden;
 import org.elsmancs.practica.dominio.Usuaria;
+import org.elsmancs.practica.dominio.NormalItem;
 import org.elsmancs.practica.repositorio.NotEnoughProException;
 import org.elsmancs.practica.repositorio.Repositorio;
 import org.elsmancs.practica.servicio.Servicio;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +41,12 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Construye una aplicacion que maneja la base de datos
@@ -76,16 +78,16 @@ public class OllivandersTest {
 	@PersistenceContext
 	private EntityManager em;
 
-	@Autowired
+	@Autowired(required = false)
 	Repositorio repo;
 	
-	@Autowired
+	@Autowired(required = false)
 	Servicio servicio;
 
-	@Autowired
+	@Autowired(required = false)
 	private MockMvc mockMvc;
-									   
-	@Autowired
+
+	@Autowired(required = false)
 	Controlador controlador;
 
 	/**
@@ -102,9 +104,8 @@ public class OllivandersTest {
 	public void test_mapping_normalItem() {
 		NormalItem elixir = em.find(NormalItem.class, "Elixir of the Mongoose");
 		assertNotNull(elixir);
-		assertEquals("Elixir of the Mongoose", elixir.getNombre());
+		assertEquals("Elixir of the Mongoose", elixir.getNombre()); //item_nom
 		assertEquals(7, elixir.getQuality(), 0);  //item_prop
-		assertEquals("NormalItem", elixir.getTipo());
+		assertEquals("NormalItem", elixir.getTipo()); //item_tipo
 	}
-
 }
