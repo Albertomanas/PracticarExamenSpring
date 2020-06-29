@@ -141,5 +141,18 @@ public class OllivandersTest {
 			assertNotNull(repo);
 		}
 		
+		
+		/**
+		 * Implementa el metodo cargaUser del repositorio
+		 * que devuelve el usuario/a con el nombre indicado
+		 */
+		@Test
+		public void test_carga_user() {
+			assertNotNull(repo);
+			Usuaria elfo = repo.cargaUser("Doobey");
+			assertNotNull(elfo);
+			assertEquals("Doobey", elfo.getNombre());
+			assertEquals(15, elfo.getDestreza());
+		}
 
 }
