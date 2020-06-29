@@ -108,4 +108,38 @@ public class OllivandersTest {
 		assertEquals(7, elixir.getQuality(), 0);  //item_prop
 		assertEquals("NormalItem", elixir.getTipo()); //item_tipo
 	}
+	
+
+	// Completa la definicion y el mapping
+	// de la clase Usuaria a la tabla t_users
+	@Test
+	public void test_mapping_user() {
+		Usuaria elfo = em.find(Usuaria.class, "Doobey");
+		assertNotNull(elfo);
+		assertEquals("Doobey", elfo.getNombre());
+		assertEquals(15, elfo.getDestreza(), 0); //user_prop
+	}
+	
+	// Completa la definicion y el mapping
+		// de la clase Orden a la tabla t_ordenes
+		// El id de esta clase ha de seguir una estrategia
+		// Identity
+		@Test 
+		public void test_mapping_orden() {
+			Orden pedido = em.find(Orden.class, 1L);
+			assertNotNull(pedido);
+			assertEquals("Doobey", pedido.getUser().getNombre());
+			assertEquals("Elixir of the Mongoose", pedido.getItem().getNombre());
+			}
+		
+		/**
+		 * Crea una clase llamada Repositorio e indica
+		 * que es un repositorio o componente de Spring 
+		 */
+		@Test
+		public void test_repositorio_es_componente() {
+			assertNotNull(repo);
+		}
+		
+
 }
