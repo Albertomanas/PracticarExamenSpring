@@ -23,6 +23,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.elsmancs.practica.repositorio.OrdenRepositorio;
 import org.elsmancs.practica.controlador.Controlador;
 import org.elsmancs.practica.dominio.Orden;
 import org.elsmancs.practica.dominio.Usuaria;
