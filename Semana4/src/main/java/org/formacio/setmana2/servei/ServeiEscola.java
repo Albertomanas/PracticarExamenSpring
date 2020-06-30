@@ -24,7 +24,7 @@ public class ServeiEscola {
 	 * L'excepcio EdatIncorrecteException no s'ha de capturar. S'ha de propagar cap el client
 	 */
 	public List<Matricula> apunta (String curs, List<String> alumnes) throws EdatIncorrecteException {
-		List<Matricula> matriculas = new ArrayList<>();
+		List<Matricula> matriculas = new ArrayList<Matricula>();
 		for (String alumno : alumnes) {
 			matriculas.add(escuela.apunta(alumno, curs));
 		}

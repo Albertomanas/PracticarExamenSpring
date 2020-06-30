@@ -167,6 +167,27 @@ public class OllivandersTest {
 			assertEquals("Elixir of the Mongoose", item.getNombre());
 			assertEquals(7, item.getQuality(), 0);
 		}
+		
+		/**
+	     * Implementa el metodo ordenar del repositorio
+		 * que permite a un usuario/a pedir un item.
+	     * El usuario/a y el item ya existen en la bbdd (NO has de crearlos).
+		 * 
+	     * El metodo devuelve la orden de tipo Orden creada.
+		 * 
+		 * Guarda la orden en la base de datos.
+		 */
+		@Test
+		@Transactional
+		public void test_ordenar_ok() throws NotEnoughProException {
+			assertNotNull(repo);
+			Orden orden = repo.ordenar("Hermione", "+5 Dexterity Vest");
+			assertNotNull(orden);
+			assertNotNull(orden.getId());
+			assertEquals("Hermione", orden.getUser().getNombre());
+			assertEquals("+5 Dexterity Vest", orden.getItem().getNombre());
+		}
+
 
 
 }
