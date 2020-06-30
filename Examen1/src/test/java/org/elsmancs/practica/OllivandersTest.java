@@ -201,6 +201,19 @@ public class OllivandersTest {
 			Orden orden = repo.ordenar("Severus", "+5 Dexterity Vest");
 			assertNull(orden);
 		}
+		
+		/**
+	     * Implementa el metodo ordenar del repositorio
+		 * para que no permita generar ordenes de productos
+		 * si no existe el item en la base de datos.
+		 */
+		@Test
+		@Transactional
+		public void test_ordenar_no_item() throws NotEnoughProException {
+			assertNotNull(repo);
+			Orden orden = repo.ordenar("Hermione", "Aged Brie");
+			assertNull(orden);
+		}
 
 
 
