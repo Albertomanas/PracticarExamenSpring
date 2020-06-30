@@ -54,6 +54,7 @@ public class Repositorio {
 	 * 2. Guarda las ordenes en la BBDD
 	 * 3. No se crea una orden si el usuario no existe en la BBDD y lo mismo para items.
 	 */
+	@Transactional
 	public List<Orden> ordenarMultiple(String cliente, List<String> productos) {
 		
 		Optional<Usuaria> user = Optional.ofNullable(this.cargaUser(cliente));
@@ -77,11 +78,14 @@ public class Repositorio {
 			} catch (NotEnoughProException e) {
 				continue;
 			}
+			// carga a la bbdd gracias a la lista mutable ordenes si cumple el requisito
 			if (orden != null) {
 				ordenes.add(orden);
 			}
 		}
 		return ordenes;
+		
+		
 	}
 	
 }

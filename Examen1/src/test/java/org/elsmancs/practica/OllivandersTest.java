@@ -259,6 +259,33 @@ public class OllivandersTest {
 			assertEquals(1, ordenes.size());		
 		}
 
+		/**
+		 * Implementa un Servicio con el metodo listarOrdenesUser.
+		 * Lista las ordenes que ha generado una determinada Usuaria.
+		 * 
+		 * Has de implementar el servicio e indicar
+		 * que es un componente Spring.
+		 */
+		@Test
+		@Transactional
+		public void test_listar_ordenes_user() {
+
+			assertNotNull(repo);
+
+	        // Has de crear el servicio e indicar que es un componente Spring.
+			assertNotNull(servicio);
+
+			List<Orden> ordenes = repo.ordenarMultiple("Hermione", Arrays.asList("+5 Dexterity Vest", "Elixir of the Mongoose"));
+			assertNotNull(ordenes);
+
+			assertEquals(2, ordenes.size());
+			assertFalse(ordenes.contains(null));
+
+			ordenes = servicio.listarOrdenesUser("Hermione");
+			assertEquals(2, ordenes.size());
+			assertFalse(ordenes.contains(null));
+		}
+
 
 
 
