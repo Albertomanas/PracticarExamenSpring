@@ -214,6 +214,50 @@ public class OllivandersTest {
 			Orden orden = repo.ordenar("Hermione", "Aged Brie");
 			assertNull(orden);
 		}
+		
+		/**
+		 * Modifica el metodo ordenar para que lance una excepcion
+		 * del tipo NotEnoughProException
+		 * cuando la destreza del usuario/a sea menor
+		 * a la calidad del Item.
+		 */
+		@org.junit.Test(expected = NotEnoughProException.class)
+		@Transactional
+		public void test_ordenar_item_sin_pro() throws NotEnoughProException {
+			assertNotNull(repo);
+			repo.ordenar("Doobey", "+5 Dexterity Vest");
+			Assert.fail();
+		}
+
+		/**
+		 * Implementa el metodo ordenarMultiple para que un usuario/a
+		 * pueda ordenar más de un Item a la vez.
+		 * Guarda las ordenes en la base de datos.
+		 * 
+		 * No se crean ordenes si el usuario no existe previamente
+		 * en la base de datos.
+		 * 
+		 * No se ordenan items que no existen en la base de datos.
+		 */
+		@Test
+		@Transactional
+		public void test_ordenar_multiples_items() {
+			assertNotNull(repo);
+			List<Orden> ordenes = repo.ordenarMultiple("Hermione", Arrays.asList("+5 Dexterity Vest", "Elixir of the Mongoose"));
+			assertNotNull(ordenes);
+
+			assertEquals(2, ordenes.size());
+			assertFalse(ordenes.contains(null));
+
+			// no se permiten ordenes si el usuario no existe en la base de datos
+			ordenes = repo.ordenarMultiple("Severus", Arrays.asList("+5 Dexterity Vest", "Elixir of the Mongoose"));
+			assertTrue(ordenes.isEmpty());
+			assertEquals(0, ordenes.size());
+
+			// no se ordenan items que no existen en la base de datos
+			ordenes = repo.ordenarMultiple("Hermione", Arrays.asList("+5 Dexterity Vest", "Aged Brie"));
+			assertEquals(1, ordenes.size());		
+		}
 
 
 
