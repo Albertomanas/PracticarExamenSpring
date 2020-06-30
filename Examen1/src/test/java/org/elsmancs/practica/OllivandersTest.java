@@ -187,6 +187,21 @@ public class OllivandersTest {
 			assertEquals("Hermione", orden.getUser().getNombre());
 			assertEquals("+5 Dexterity Vest", orden.getItem().getNombre());
 		}
+		
+
+		/**
+	     * Implementa el metodo ordenar del repositorio
+		 * para que no permita generar ordenes de productos
+		 * si no existe el usuario/a en la base de datos.
+		 */
+		@Test
+		@Transactional
+		public void test_ordenar_no_user() throws NotEnoughProException {
+			assertNotNull(repo);
+			Orden orden = repo.ordenar("Severus", "+5 Dexterity Vest");
+			assertNull(orden);
+		}
+
 
 
 
