@@ -312,7 +312,46 @@ public class OllivandersTest {
 		}
 		
 
+		/**
+	     * Ordena un pedido empleando sólo el método POST en la url
+	     *    /ordena
+	     * Los parametros post necesarios son "usuaria" con el nombre de la persona
+		 * e "item" con el nombre del objeto.
+	     * La peticion ha de retornar el texto "OK" si la orden de pedido ha sido generada
+		 * y "KO" en caso contrario.
+	     */
+		@Test
+	    public void test_post() throws Exception {
 
+			this.mockMvc.perform(post("/ordena")
+			.param("usuaria", "Hermione")
+			.param("item", "+5 Dexterity Vest"))
+			.andExpect(status().isOk())
+			.andExpect(content().string("OK"));
 
+			// La orden se ha guardado en la BBDD
+			List<Orden> ordenes = servicio.listarOrdenesUser("Hermione");
+			assertEquals(1, ordenes.size());
+			assertFalse(ordenes.contains(null));
 
-}
+			// Si la usuaria no existe el controlador devuelve el texto "KO"
+			this.mockMvc.perform(post("/ordena")
+			.param("usuaria", "Severus")
+			.param("item", "+5 Dexterity Vest"))
+			.andExpect(status().isOk()).andExpect(content().string("KO"));
+		}
+
+		   /**
+	     * Asegurate de que en la URl /ordena
+	     * solo se reciben peticiones POST
+	     */
+	    @Test
+	    public void test_post_error() throws Exception {
+	 
+			this.mockMvc.perform(get("/ordena")
+			.param("usuaria", "Severus")
+			.param("item", "+5 Dexterity Vest"))
+			.andExpect(status().is4xxClientError());
+	    }
+	}
+
