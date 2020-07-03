@@ -11,17 +11,17 @@ public class Curs {
 
 	@Id
 	@Column(name = "cur_nom")
-	private String nombre;
+	private String nom;
 	
 	@Column(name = "cur_edatminima")
 	private int edatminima;
 	
 	public String getNom() {
-		return this.nombre;
+		return this.nom;
 	}
 	
 	public void setNom(String nombre) {
-		this.nombre =  nombre;
+		this.nom =  nombre;
 	}
 	
 	public int getEdatMinima() {
@@ -31,4 +31,6 @@ public class Curs {
 	public void setEdatMinima(int edatminima) {
 		this.edatminima = edatminima;
 	}
+	
+	
 }

@@ -1,5 +1,8 @@
 package org.formacio.setmana2.repositori;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -43,5 +46,5 @@ public class RepositoriEscola {
 		}
 		return matricula;
 	}
-	
+		
 }
